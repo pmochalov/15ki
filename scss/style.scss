@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import 'normalize';
+
+// $width: 400px;
+// $height: 400px;
+
+$field: (
+    bg: #999, 
+    tagBg: #000,
+    radius: 16px,
+);
+
+body {
+    background-color: #ddd;
+    padding: 32px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.tags {
+    position: relative;
+    background-color: map-get($field, tagBg);
+    border-radius: map-get($field, radius);
+
+    &__btn {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        background-color: map-get($field, bg);
+        font-size: 32px;
+        border-radius: map-get($field, radius);
+        border: #888 1px solid;
+        transition: all .2s;
+    }
+
+    &__btn_active {
+        background-color: #fc0;
+    }
+
+    &__btn:hover {
+        background-color: #888;
+    }    
+    
+}
