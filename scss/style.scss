@@ -31,15 +31,22 @@ body {
         font-size: 32px;
         border-radius: map-get($field, radius);
         border: #888 1px solid;
-        transition: all .2s;
+        transition: all .1s;
+        color:#444;
     }
 
     &__btn_active {
-        background-color: #fc0;
+        background-color: #888;
+        color:#000;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
-    &__btn:hover {
-        background-color: #888;
+    
+    &__btn:hover {        
+        // background-color: #888;
     }    
     
 }

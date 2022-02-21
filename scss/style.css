@@ -323,12 +323,10 @@ body {
     font-size: 32px;
     border-radius: 16px;
     border: #888 1px solid;
-    transition: all .1s;
-    color: #444; }
+    transition: all .2s; }
   .tags__btn_active {
-    background-color: #888;
-    color: #000; }
-    .tags__btn_active:hover {
-      cursor: pointer; }
+    background-color: #fc0; }
+  .tags__btn:hover {
+    background-color: #888; }
 
 /*# sourceMappingURL=style.css.map */
