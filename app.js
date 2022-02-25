@@ -2,7 +2,7 @@ const tagsField = document.querySelector('.tags');
 const btnWidth = 80;
 const size = 4;
 let emptyCoords = {}; // координата пустого места
-let numbers = getNumbers();
+let numbers = getRandNumbers();
 let activeTags = [];
 
 
@@ -86,14 +86,13 @@ function setEmptyCoords() {
 
     for (let i = 0; i < numbers.length; i++) {
         let pos = numbers[i].indexOf(0);
-        if (numbers[i].indexOf(0) !== -1) {
+        if (pos !== -1) {
             emptyCoords = {
                 pos: pos,
                 stroke: i
             }
         }
     }
-
 }
 
 
@@ -102,7 +101,6 @@ function createGame() {
     for (let i = 0; i < numbers.length; i++) {
         createStroke(numbers[i], i)
     }
-
 }
 
 
@@ -117,11 +115,11 @@ function createStroke(numbers, stroke) {
         let tag = createTag(numbers[pos], pos, stroke);
         tagsField.append(tag);
     }
-
 }
 
 
 function createTag(number, pos, stroke) {
+
     let btn = document.createElement('div');
     btn.classList.add('tags__btn');
     btn.style.width = `${btnWidth}px`;
@@ -136,7 +134,7 @@ function createTag(number, pos, stroke) {
 }
 
 
-function getNumbers() {
+function getRandNumbers() {
 
     let numbers = [];
 
@@ -167,6 +165,3 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
-
-// http://127.0.0.1:5500/index.html
