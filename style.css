@@ -305,30 +305,31 @@ template {
   display: none; }
 
 body {
-  background-color: #ddd;
+  background-color: #fff;
   padding: 32px;
   font-family: 'Roboto Slab', serif; }
 
 .tags {
   position: relative;
-  background-color: #000;
-  border-radius: 16px; }
-  .tags__btn {
+  background-color: #999;
+  border-radius: 16px;
+  box-shadow: inset 0px 0px 5px #999; }
+  .tags__tag {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    background-color: #999;
+    background-color: #fc0;
     font-size: 32px;
     border-radius: 16px;
-    border: #888 1px solid;
+    border: #999 1px solid;
     transition: all .1s;
-    color: #444; }
-  .tags__btn_active {
-    background-color: #888;
+    color: #999; }
+  .tags__tag_active {
     color: #000; }
-    .tags__btn_active:hover {
-      cursor: pointer; }
+    .tags__tag_active:hover {
+      cursor: pointer;
+      box-shadow: inset 0px 0px 5px #997a00; }
 
 /*# sourceMappingURL=style.css.map */

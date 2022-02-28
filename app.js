@@ -1,14 +1,13 @@
-const tagsField = document.querySelector('.tags');
-const btnWidth = 80;
-const size = 4;
-let emptyCoords = {}; // координата пустого места
+const tagsField = document.querySelector('.tags');  // блок игрового поля
+const tagWidth = 80;                                // ширина костяшки, px
+const size = 4;                                     // количество костяшек в ряду
+let emptyCoords = {};                               // координата пустого места
 let numbers = getRandNumbers();
-let activeTags = [];
 
 
 (function () {
-    tagsField.style.width = `${btnWidth * size}px`;
-    tagsField.style.height = `${btnWidth * size}px`;
+    tagsField.style.width = `${tagWidth * size}px`;
+    tagsField.style.height = `${tagWidth * size}px`;
 
     setEmptyCoords();
     createGame();
@@ -16,6 +15,7 @@ let activeTags = [];
 })();
 
 
+//
 tagsField.addEventListener('click', (event) => {
 
     let el = event.target;
@@ -29,20 +29,19 @@ tagsField.addEventListener('click', (event) => {
     numbers[emptyCoords.stroke][emptyCoords.pos] = +el.innerText;
     numbers[+tagCoords[1]][+tagCoords[0]] = 0;
 
-    el.style.left = emptyCoords.pos * btnWidth + 'px';
-    el.style.top = emptyCoords.stroke * btnWidth + 'px';
-
+    el.style.left = emptyCoords.pos * tagWidth + 'px';
+    el.style.top = emptyCoords.stroke * tagWidth + 'px';
     el.dataset.coords = `${emptyCoords.pos},${emptyCoords.stroke}`;
 
-    emptyCoords.pos = +tagCoords[0];
-    emptyCoords.stroke = +tagCoords[1];
-
+    setEmptyCoords(+tagCoords[0], +tagCoords[1]);
     setActiveTags();
 });
 
 
+// Устанавливает класс для костяшек, которые можно двигать
 function setActiveTags() {
-    let coords = []; // 
+
+    let coords = [];
 
     if (emptyCoords.pos - 1 !== -1) {
         coords.push([emptyCoords.pos - 1, emptyCoords.stroke])
@@ -61,8 +60,10 @@ function setActiveTags() {
     }
 
     for (let tag of tagsField.children) {
-        let tagCoords = tag.dataset.coords.split(","); // [2, 3]
+
+        let tagCoords = tag.dataset.coords.split(",");
         let isActive = false;
+
         for (let i = 0; i < coords.length; i++) {
             if (coords[i].join("") == tagCoords.join("")) {
                 isActive = true;
@@ -70,32 +71,44 @@ function setActiveTags() {
         }
 
         if (isActive) {
-            tag.classList.add('tags__btn_active');
+            tag.classList.add('tags__tag_active');
             tag.setAttribute('isactive', "");
         } else {
-            tag.classList.remove('tags__btn_active');
+            tag.classList.remove('tags__tag_active');
             tag.removeAttribute('isactive');
         }
-
     }
 
 }
 
 
-function setEmptyCoords() {
+// Устанавливает координаты пустого места
+function setEmptyCoords(pos = null, stroke = null) {
 
-    for (let i = 0; i < numbers.length; i++) {
-        let pos = numbers[i].indexOf(0);
-        if (pos !== -1) {
-            emptyCoords = {
-                pos: pos,
-                stroke: i
+    if (pos == null && stroke == null) {
+
+        for (let i = 0; i < numbers.length; i++) {
+            let pos = numbers[i].indexOf(0);
+            if (pos !== -1) {
+                emptyCoords = {
+                    pos: pos,
+                    stroke: i
+                }
             }
         }
+
+    } else {
+
+        emptyCoords = {
+            pos: pos,
+            stroke: stroke
+        }
+
     }
 }
 
 
+// Создание игры
 function createGame() {
 
     for (let i = 0; i < numbers.length; i++) {
@@ -104,6 +117,7 @@ function createGame() {
 }
 
 
+// Создает ряд костяшек
 function createStroke(numbers, stroke) {
 
     for (let pos = 0; pos < numbers.length; pos++) {
@@ -118,22 +132,25 @@ function createStroke(numbers, stroke) {
 }
 
 
+// Создает и возвращает костяшку
 function createTag(number, pos, stroke) {
 
     let btn = document.createElement('div');
-    btn.classList.add('tags__btn');
-    btn.style.width = `${btnWidth}px`;
-    btn.style.height = `${btnWidth}px`;
+
+    btn.classList.add('tags__tag');
+    btn.style.width = `${tagWidth}px`;
+    btn.style.height = `${tagWidth}px`;
     btn.innerText = number;
 
-    btn.style.left = pos * btnWidth + 'px';
-    btn.style.top = stroke * btnWidth + 'px';
+    btn.style.left = pos * tagWidth + 'px';
+    btn.style.top = stroke * tagWidth + 'px';
     btn.dataset.coords = `${pos},${stroke}`;
 
     return btn;
 }
 
 
+// Возвращает массив случайных чисел от 0 до size**2 - 1
 function getRandNumbers() {
 
     let numbers = [];
@@ -158,6 +175,7 @@ function getRandNumbers() {
 }
 
 
+// Возвращает случайное целое число от min до max включительно
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -165,3 +183,14 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+
+
+// Проверка победителя
+function checkWin() {
+    let arr = numbers.join().split(",");
+
+    for (let i = 0; i < arr.length - 1; i++) {
+        console.log(arr[i])
+    }
+
+}

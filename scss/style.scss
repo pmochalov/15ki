@@ -6,47 +6,47 @@
 
 $field: (
     bg: #999, 
-    tagBg: #000,
     radius: 16px,
 );
 
+$tag: (
+    bg: #fc0,
+    color:#999 
+);
+
 body {
-    background-color: #ddd;
+    background-color: #fff;
     padding: 32px;
     font-family: 'Roboto Slab', serif;
 }
 
 .tags {
     position: relative;
-    background-color: map-get($field, tagBg);
+    background-color: map-get($field, bg);
     border-radius: map-get($field, radius);
+    box-shadow: inset 0px 0px 5px map-get($field, bg);
 
-    &__btn {
+    &__tag {
         position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
         box-sizing: border-box;
-        background-color: map-get($field, bg);
+        background-color: map-get($tag, bg);
         font-size: 32px;
         border-radius: map-get($field, radius);
-        border: #888 1px solid;
+        border: map-get($field, bg) 1px solid;
         transition: all .1s;
-        color:#444;
+        color:map-get($tag, color);
     }
 
-    &__btn_active {
-        background-color: #888;
+    &__tag_active {
         color:#000;
 
         &:hover {
             cursor: pointer;
+            box-shadow: inset 0px 0px 5px darken(map-get($tag, bg), 20%);
         }
     }
-
-    
-    &__btn:hover {        
-        // background-color: #888;
-    }    
     
 }
