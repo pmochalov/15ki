@@ -7,11 +7,19 @@
 $field: (
     bg: #999, 
     radius: 16px,
+    messageBg: rgba(0, 0, 0, .5),
+    messageColor: #fff,
 );
 
 $tag: (
     bg: #fc0,
     color:#999 
+);
+
+$button: (
+    bg: #fc0,
+    color: #000,    
+    radius: 4px, 
 );
 
 body {
@@ -25,6 +33,14 @@ body {
     background-color: map-get($field, bg);
     border-radius: map-get($field, radius);
     box-shadow: inset 0px 0px 5px map-get($field, bg);
+
+    &__field {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0
+    }
 
     &__tag {
         position: absolute;
@@ -45,8 +61,36 @@ body {
 
         &:hover {
             cursor: pointer;
-            box-shadow: inset 0px 0px 5px darken(map-get($tag, bg), 20%);
         }
     }
     
+    &__message {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: map-get($field, messageBg);
+        color: map-get($field, messageColor);
+        border-radius: map-get($field, radius);
+        z-index: 3;
+    }
+
+}
+
+.btn {
+    background-color: map-get($button, bg);
+    border: 0;
+    padding: 8px 12px;
+    margin-top: 8px;
+    border-radius: map-get($button, radius);
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
 }

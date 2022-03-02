@@ -1,4 +1,5 @@
-const tagsField = document.querySelector('.tags');  // блок игрового поля
+const tags = document.querySelector('.tags');  // блок игрового поля
+const tagsField = tags.querySelector('.tags__field');
 const tagWidth = 80;                                // ширина костяшки, px
 const size = 4;                                     // количество костяшек в ряду
 let emptyCoords = {};                               // координата пустого места
@@ -6,16 +7,25 @@ let numbers = getRandNumbers();
 
 
 (function () {
-    tagsField.style.width = `${tagWidth * size}px`;
-    tagsField.style.height = `${tagWidth * size}px`;
+    tags.style.width = `${tagWidth * size}px`;
+    tags.style.height = `${tagWidth * size}px`;
 
-    setEmptyCoords();
-    createGame();
-    setActiveTags();
+    start();
+
 })();
 
 
-//
+function start() {
+
+    tagsField.innerHTML = "";
+    numbers = getRandNumbers();
+
+    setEmptyCoords();
+    createStrokes();
+    setActiveTags();
+}
+
+
 tagsField.addEventListener('click', (event) => {
 
     let el = event.target;
@@ -35,6 +45,10 @@ tagsField.addEventListener('click', (event) => {
 
     setEmptyCoords(+tagCoords[0], +tagCoords[1]);
     setActiveTags();
+
+    if (checkWin(numbers)) {
+        showFinishMessage();
+    }
 });
 
 
@@ -109,7 +123,7 @@ function setEmptyCoords(pos = null, stroke = null) {
 
 
 // Создание игры
-function createGame() {
+function createStrokes() {
 
     for (let i = 0; i < numbers.length; i++) {
         createStroke(numbers[i], i)
@@ -185,12 +199,59 @@ function getRandomInt(min, max) {
 
 
 
-// Проверка победителя
-function checkWin() {
-    let arr = numbers.join().split(",");
+// Проверка на победу
+function checkWin(nums) {
+    let arr = nums.join().split(",");
 
     for (let i = 0; i < arr.length - 1; i++) {
-        console.log(arr[i])
+        if (+arr[i] !== i + 1) {
+            return true;
+        }
     }
 
+    return false;
 }
+
+
+// Показывает сообщение о победе
+function showFinishMessage() {
+
+    const tagsMsg = document.createElement('div');
+    tagsMsg.classList.add('tags__message');
+    tagsMsg.innerHTML = "<span>Игра окончена!</span>"
+
+    const buttonStart = document.createElement('button');
+    buttonStart.className = "btn btn__start";
+    buttonStart.innerText = "Ещё раз";
+
+    buttonStart.addEventListener('click', start);
+
+    tagsMsg.append(buttonStart);
+    tags.append(tagsMsg);
+}
+
+// Скрывает сообщение
+function hideMessage() {
+
+    const tagsMsg = document.createElement('div');
+    tagsMsg.classList.add('tags__message');
+    tagsMsg.innerHTML = "<span>Игра окончена!</span>"
+
+    const buttonStart = document.createElement('button');
+    buttonStart.className = "btn btn__start";
+    buttonStart.innerText = "Ещё раз";
+
+    buttonStart.addEventListener('click', start);
+
+    tagsMsg.append(buttonStart);
+    tags.append(tagsMsg);
+}
+
+
+
+// let tempNums = [
+//     [1, 2, 3, 4],
+//     [5, 6, 7, 8],
+//     [9, 10, 11, 12],
+//     [13, 14, 15, 0]
+// ];

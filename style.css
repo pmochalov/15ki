@@ -314,6 +314,12 @@ body {
   background-color: #999;
   border-radius: 16px;
   box-shadow: inset 0px 0px 5px #999; }
+  .tags__field {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0; }
   .tags__tag {
     position: absolute;
     display: flex;
@@ -329,7 +335,30 @@ body {
   .tags__tag_active {
     color: #000; }
     .tags__tag_active:hover {
-      cursor: pointer;
-      box-shadow: inset 0px 0px 5px #997a00; }
+      cursor: pointer; }
+  .tags__message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 16px;
+    z-index: 3; }
+
+.btn {
+  background-color: #fc0;
+  border: 0;
+  padding: 8px 12px;
+  margin-top: 8px;
+  border-radius: 4px; }
+  .btn:hover {
+    cursor: pointer;
+    transform: scale(1.05); }
 
 /*# sourceMappingURL=style.css.map */
