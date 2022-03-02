@@ -230,21 +230,10 @@ function showFinishMessage() {
     tags.append(tagsMsg);
 }
 
+
 // Скрывает сообщение
 function hideMessage() {
 
-    const tagsMsg = document.createElement('div');
-    tagsMsg.classList.add('tags__message');
-    tagsMsg.innerHTML = "<span>Игра окончена!</span>"
-
-    const buttonStart = document.createElement('button');
-    buttonStart.className = "btn btn__start";
-    buttonStart.innerText = "Ещё раз";
-
-    buttonStart.addEventListener('click', start);
-
-    tagsMsg.append(buttonStart);
-    tags.append(tagsMsg);
 }
 
 
