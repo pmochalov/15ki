@@ -17,6 +17,8 @@ let numbers = getRandNumbers();
 
 function start() {
 
+    hideMessage();
+
     tagsField.innerHTML = "";
     numbers = getRandNumbers();
 
@@ -36,8 +38,8 @@ tagsField.addEventListener('click', (event) => {
 
     let tagCoords = el.dataset.coords.split(",");
 
-    numbers[emptyCoords.stroke][emptyCoords.pos] = +el.innerText;
-    numbers[+tagCoords[1]][+tagCoords[0]] = 0;
+    numbers[emptyCoords.stroke][emptyCoords.pos] = +el.innerText; // координаты куда передвинулась
+    numbers[+tagCoords[1]][+tagCoords[0]] = 0; // координаты пустого места
 
     el.style.left = emptyCoords.pos * tagWidth + 'px';
     el.style.top = emptyCoords.stroke * tagWidth + 'px';
@@ -52,7 +54,7 @@ tagsField.addEventListener('click', (event) => {
 });
 
 
-// Устанавливает класс для костяшек, которые можно двигать
+// Установить класс для костяшек, которые можно двигать
 function setActiveTags() {
 
     let coords = [];
@@ -96,7 +98,7 @@ function setActiveTags() {
 }
 
 
-// Устанавливает координаты пустого места
+// Усатановить координаты пустого места
 function setEmptyCoords(pos = null, stroke = null) {
 
     if (pos == null && stroke == null) {
@@ -122,7 +124,7 @@ function setEmptyCoords(pos = null, stroke = null) {
 }
 
 
-// Создание игры
+// Создание строк игрового поля
 function createStrokes() {
 
     for (let i = 0; i < numbers.length; i++) {
@@ -131,7 +133,7 @@ function createStrokes() {
 }
 
 
-// Создает ряд костяшек
+// Создание ряда костяшек
 function createStroke(numbers, stroke) {
 
     for (let pos = 0; pos < numbers.length; pos++) {
@@ -198,18 +200,17 @@ function getRandomInt(min, max) {
 }
 
 
-
 // Проверка на победу
 function checkWin(nums) {
     let arr = nums.join().split(",");
 
     for (let i = 0; i < arr.length - 1; i++) {
         if (+arr[i] !== i + 1) {
-            return true;
+            return false;
         }
     }
 
-    return false;
+    return true;
 }
 
 
@@ -231,8 +232,13 @@ function showFinishMessage() {
 }
 
 
-// Скрывает сообщение
+// Скрыть сообщение
 function hideMessage() {
+    let tagsMsg = document.querySelector('.tags__message');
+
+    if (tagsMsg) {
+        tagsMsg.remove();
+    }
 
 }
 

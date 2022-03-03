@@ -331,7 +331,7 @@ body {
     border-radius: 16px;
     border: #999 1px solid;
     transition: all .1s;
-    color: #999; }
+    color: #555; }
   .tags__tag_active {
     color: #000; }
     .tags__tag_active:hover {
