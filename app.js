@@ -1,8 +1,8 @@
-const tags = document.querySelector('.tags');  // блок игрового поля
-const tagsField = tags.querySelector('.tags__field');
-const tagWidth = 80;                                // ширина костяшки, px
-const size = 4;                                     // количество костяшек в ряду
-let emptyCoords = {};                               // координата пустого места
+const tags = document.querySelector('.tags');         // блок контейнера 
+const tagsField = tags.querySelector('.tags__field'); // блок игрового поля с костяшками
+const tagWidth = 80;                                  // ширина костяшки, px
+const size = 4;                                       // количество костяшек в ряду
+let emptyCoords = {};                                 // координата пустого места
 let numbers = getRandNumbers();
 
 
@@ -94,7 +94,6 @@ function setActiveTags() {
             tag.removeAttribute('isactive');
         }
     }
-
 }
 
 
